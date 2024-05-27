@@ -1,6 +1,6 @@
 
 
-/* first */
+/* 1. Write a script to extracts all the numerics from Alphanumeric String */
 create function dbo.extractnumeric(@input nvarchar(max))
 returns nvarchar(max)
 as
@@ -28,7 +28,7 @@ select dbo.extractnumeric(@alphanumeric) as numerics;
 
 -------------------------------------------------------
 
-/*second*/
+/* 2. Write a script to calculate age based on the Input DOB */
 
  create function dbo.calculateAge(@dob date)
  returns int
@@ -50,7 +50,7 @@ select dbo.calculateAge(@dob);
 
 --------------------------------------------------------
 
-/* Third */
+/* 3. Create a column in a table and that should throw an error when we do SELECT * or SELECT of that column. If we select other columns then we should see results */
 
 create table error(eid int,ename varchar(15),error as (eid/0));
 insert into error values(1,'a');
@@ -62,7 +62,7 @@ select error from error;
 
 ---------------------------------------------------------
 
-/*fourth*/
+/* 4. Display Calendar Table based on the input year. */
 
 create table calender([Date] DATE PRIMARY KEY,DayOfYear INT,[Week] INT,DayOfWeek INT,[Month] INT,DayOfMonth INT);
 
@@ -104,7 +104,7 @@ select * from calender;
 
 ------------------------------------------------------------------------------------------
 
-/* fifth */
+/* 5. Display Emp and Manager Hierarchies based on the input till the topmost hierarchy. */
 
 create table employees(empid int primary key,ename varchar(15),managerid int null,foreign key(managerid) references employees(empid));
 
