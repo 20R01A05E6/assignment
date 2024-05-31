@@ -155,6 +155,41 @@ from bonus_eligibile;
 /* 4.write a query to Get Max, Min and Average age of employees, service of employees by service Type , Service Status for each Centre(display in years and Months) */
 
 
+alter table bonus_eligibile add service_status as CONCAT(DATEDIFF(YEAR,joining_date,GETDATE()),' years and ', DATEDIFF(MONTH,joining_date,GETDATE())%12,' months');
+SELECT 
+    service_Type,service_status,
+    MAX(DATEDIFF(YEAR, dob, GETDATE())) AS max_age_years,
+    MIN(DATEDIFF(YEAR, dob, GETDATE())) AS min_age_years,
+    AVG(DATEDIFF(YEAR, dob, GETDATE())) AS avg_age_years
+FROM 
+    bonus_eligibile
+GROUP BY 
+    service_type,service_status;
+
+
+/* SELECT 
+    service_type,
+    AVG(DATEDIFF(YEAR, dob, GETDATE())) AS avg_age_years,
+    AVG(DATEDIFF(MONTH, dob, GETDATE())) % 12 AS avg_age_months,
+    MIN(DATEDIFF(YEAR, dob, GETDATE())) AS min_age_years,
+    MIN(DATEDIFF(MONTH, dob, GETDATE())) % 12 AS min_age_months,
+    MAX(DATEDIFF(YEAR, dob, GETDATE())) AS max_age_years,
+    MAX(DATEDIFF(MONTH, dob, GETDATE())) % 12 AS max_age_months,
+    CASE 
+        WHEN DATEDIFF(YEAR, joining_date, GETDATE()) >= 15 THEN 'Active'
+        ELSE 'Inactive'
+    END AS service_status
+FROM 
+    bonus_eligibile
+GROUP BY 
+    service_type,joining_date; */
+
+
+/* select *,min(datediff(year,dob,getdate())) over(partition by service_type order by service_type)as minage,max(datediff(year,dob,getdate())) 
+over(partition by service_type order by service_type) as maxage,avg(datediff(year,dob,getdate())) over(partition by service_type order by service_type) as avgage from bonus_eligibile; */
+
+
+
 
 
 
